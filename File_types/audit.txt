@@ -1,0 +1,21 @@
+Foremost version 1.5.7 by Jesse Kornblum, Kris Kendall, and Nick Mikus
+Audit File
+
+Foremost started at Wed Mar 23 00:35:06 2022
+Invocation: foremost -T Flag.pdf 
+Output directory: /Users/christopherwrogg/Desktop/WolvSec/PICO-CTF/File_types
+Configuration file: /opt/homebrew/etc/foremost.conf
+------------------------------------------------------------------
+File: Flag.pdf
+Start: Wed Mar 23 00:35:06 2022
+Length: Unknown
+ 
+Num	 Name (bs=512)	       Size	 File Offset	 Comment 
+
+Finish: Wed Mar 23 00:35:06 2022
+
+0 FILES EXTRACTED
+	
+------------------------------------------------------------------
+
+Foremost finished at Wed Mar 23 00:35:06 2022
