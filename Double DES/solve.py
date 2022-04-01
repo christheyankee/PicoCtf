@@ -13,7 +13,7 @@ def pad(msg):
     return str(msg + " " * pad).encode('utf-8')
 
 def single_encrypt(m, KEY1):
-    msg = b'\x11\x11\x11     '
+    msg = pad(binascii.unhexlify(str(m).rstrip()).decode())
     cipher1 = DES.new(KEY1, DES.MODE_ECB)
     return binascii.hexlify(cipher1.encrypt(msg)).decode()
 
@@ -49,18 +49,22 @@ target = conn.recvline().decode('utf-8').strip()
 conn.close()
 lookup = {}
 potential_keys = []
+progress_1 = pwn.log.progress(message="Decrypting")
+progress_1.status("Computing ENC(m)")
 for combo in itertools.product(string.digits, repeat=6):
     key = pad(''.join(combo))
     lookup[single_encrypt('111111', key)] = key
+progress_1.status("Computing DEC(c)")
 for combo in itertools.product(string.digits, repeat=6):
     key = pad(''.join(combo))
     candidate_pt = binascii.hexlify(single_decrypt(target, key)).decode()
     if candidate_pt in lookup:
         potential_keys.append({lookup[candidate_pt], key})
-
+progress_1.status("Retrieving flag")
 for (key1, key2) in potential_keys:
     try:
-        print(double_decrypt(flag, key1, key2).decode())
+        progress_1.success()
+        pwn.log.success(message=str(double_decrypt(flag, key1, key2).decode()))
         break
     except:
         continue
