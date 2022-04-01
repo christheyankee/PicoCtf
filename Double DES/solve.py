@@ -64,4 +64,3 @@ for (key1, key2) in potential_keys:
         break
     except:
         continue
-    #print(key1, key2)
